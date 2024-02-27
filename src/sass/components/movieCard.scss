@@ -1,0 +1,15 @@
+.card_container{
+    background-color: rgb(42, 62, 109);
+    color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    .card{
+        padding: 0.5rem;
+        flex-direction: column;
+        .movie_aditonal_info_card{
+            display: flex;
+            justify-content: space-between;
+
+        }
+    }
+}

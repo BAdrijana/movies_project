@@ -1,0 +1,43 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+              // 16px = 1rem (base)
+html {
+  // This defines what 1rem is
+  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+
+}
+
+body {
+  box-sizing: border-box;
+  padding: 0;
+
+}
+.center_item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+::selection {
+  background-color: rgb(42, 62, 109);
+  color: white;
+}
+h1{
+  color: white;
+}
+a {
+  color: red;
+}
+
+select{
+  background: transparent!important;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>")!important;
+ background-repeat: no-repeat!important;
+    font-size: 1.4rem!important;
+    background-position-x: 95%!important;
+    background-position-y: 50%!important;
+}

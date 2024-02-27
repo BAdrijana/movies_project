@@ -1,0 +1,45 @@
+.searchbar_container{
+    padding: 1rem;
+  
+    background-position:center;
+    background-size:cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .search_bar {
+        width: 40%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        border-radius: 2rem;
+        input {
+            background: transparent;
+            flex: 1;
+            border-radius: 2rem 0 0 2rem;
+            padding: 1rem 2rem;
+            font-size: 20px;
+            color: #cccc;
+            outline: none;
+            border: none;
+          }
+          & ::placeholder {
+            color: whitesmoke;
+          }
+      }
+      
+     
+      .search_bar button {
+        border: 0;
+        height: 43.5px;
+        width: 44px;
+        border-radius: 0 2rem 2rem 0;
+        background-color:rgba(232,240,254,255);
+        
+        cursor: pointer;
+        .search_icon{
+          padding: 1rem;
+          color: rgb(3, 43, 76);
+          font-weight: 500;
+        }
+      }
+}
