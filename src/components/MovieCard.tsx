@@ -1,11 +1,92 @@
 "use client";
+import { useEffect, useState } from "react";
 import React from "react";
 import { MovieCardProps } from "../types";
+import MovieModal from "./MovieModal";
+import useMovieInfo from "../hooks/useMovieInfo";
+import { useModalStore } from "../store/modalStore";
 
+export interface MovieInfo {
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: BelongsToCollection;
+  budget: number;
+  genres: Genre[];
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  release_date: string;
+  revenue: number;
+  runtime: number;
+  spoken_languages: SpokenLanguage[];
+  status: string;
+  tagline: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+export interface BelongsToCollection {
+  id: number;
+  name: string;
+  poster_path: string;
+  backdrop_path: string;
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface ProductionCompany {
+  id: number;
+  logo_path?: string;
+  name: string;
+  origin_country: string;
+}
+
+export interface ProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
+export interface SpokenLanguage {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
 const MovieCard = ({ movie }: MovieCardProps) => {
-  console.log(movie, "kdjns", typeof movie);
+  const { getMovieInfo, loading } = useMovieInfo();
+
+  const [movieData, setMovieData] = useState<MovieInfo>();
+
+  const getMovie = () => {
+    getMovieInfo(movie.id, setMovieData);
+  };
+  const { toggleShow, show } = useModalStore((state) => state);
+  useEffect(() => {
+    document.body.style.overflowY = "auto";
+    setMovieData(undefined);
+  }, [show]);
+  useEffect(() => {
+    setMovieData(undefined);
+  }, []);
   return (
-    <div className="card_container center_item">
+    <div
+      className="card_container center_item"
+      onClick={() => {
+        getMovie();
+        toggleShow();
+      }}
+    >
       <div className="card center_item">
         <div className="movie_image_thumbnail_container">
           <img
@@ -24,6 +105,8 @@ const MovieCard = ({ movie }: MovieCardProps) => {
           </div>
         </div>
       </div>
+
+      {show ? movieData && <MovieModal movie={movieData} /> : null}
     </div>
   );
 };
