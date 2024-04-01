@@ -8,7 +8,7 @@
     justify-content: center;
     .search_bar {
         width: 40%;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgb(42, 62, 109);
         display: flex;
         align-items: center;
         border-radius: 2rem;
@@ -24,6 +24,8 @@
           }
           & ::placeholder {
             color: whitesmoke;
+            font-size: 14px;
+            color:rgba(232,240,254,.5);
           }
       }
       
@@ -33,12 +35,13 @@
         height: 43.5px;
         width: 44px;
         border-radius: 0 2rem 2rem 0;
-        background-color:rgba(232,240,254,255);
+        background-color:rgba(232,240,254,.2);
         
         cursor: pointer;
         .search_icon{
           padding: 1rem;
           color: rgb(3, 43, 76);
+          color: white;
           font-weight: 500;
         }
       }

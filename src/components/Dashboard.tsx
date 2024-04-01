@@ -4,6 +4,8 @@ import MovieCard from "./MovieCard";
 import Searchbar from "./Searchbar";
 import useMovies from "../hooks/useMovies";
 import { useMoviesStore } from "../store/moviesStore";
+import useGenres from "../hooks/useGenres";
+import { useGenresStore } from "../store/genresStore";
 export interface Movies {
   page: number;
   results: MovieResult[];
@@ -28,18 +30,21 @@ export interface MovieResult {
   vote_count: number;
 }
 const Dashboard = () => {
-  const { getMovies, loading } = useMovies();
+  const { getMovies } = useMovies();
+  const { getGenres } = useGenres();
 
   // const movies = useMoviesStore((state) => state.movies);
   const [movies, setMovies] = useState<Movies>();
+  const genre = useGenresStore((state) => state.genre);
   useEffect(() => {
     getMovies(setMovies);
+    getGenres();
   }, []);
 
   return (
     <div className="main_container">
       <div className="sidebar_container">
-        <Sidebar />
+        <Sidebar genre={genre} />
       </div>
 
       <div className="dashboard_container">
