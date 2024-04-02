@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 3.5rem;
     .search_bar {
         width: 40%;
         background: rgb(42, 62, 109);
@@ -17,7 +18,7 @@
             flex: 1;
             border-radius: 2rem 0 0 2rem;
             padding: 1rem 2rem;
-            font-size: 20px;
+            font-size: 1.5rem;
             color: #cccc;
             outline: none;
             border: none;

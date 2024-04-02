@@ -1,12 +1,16 @@
 .main_container{
     width: 98vw;
-    margin: 2rem auto;
+    margin: 0rem auto;
     display: flex;
 }
 .sidebar_container{
+    height: 100vh;
     width: 12% ;
     position: sticky;
+    left: 0;
+    top: 0;
     background-color: rgb(42, 62, 109);
+    padding: 5rem 1rem;
 }
 .dashboard_container{
     width: 100%;
@@ -15,5 +19,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        padding: 3rem 0;
     }
 }
