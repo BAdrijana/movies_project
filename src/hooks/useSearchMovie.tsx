@@ -2,39 +2,15 @@ import { useState } from "react";
 import { baseURL } from "../endpoints/baseURL";
 import { readToken } from "../endpoints/baseURL";
 import { useMoviesStore } from "../store/moviesStore";
-export interface Movies {
-  page: number;
-  results: MovieResult[];
-  total_pages: number;
-  total_results: number;
-}
 
-export interface MovieResult {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
-
-const useMovies = () => {
+const useSearchMovie = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { setMovies } = useMoviesStore((state) => state);
 
-  const getMovies = async () => {
+  const searchMovie = async (movieSearch: string) => {
     setLoading(true);
     setError(null);
-
     try {
       const options = {
         method: "GET",
@@ -43,12 +19,12 @@ const useMovies = () => {
           Authorization: "Bearer " + readToken,
         },
       };
-
       const response = await fetch(
-        `${baseURL}discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`,
+        `${baseURL}search/movie?api_key=0e4c4726fcd671c6d9dd8fb5b6a74b0f&query=${movieSearch}`,
         options
       );
       const data = await response.json();
+      console.log(data);
       setMovies(data);
     } catch (error: any) {
       setError(error.message);
@@ -58,10 +34,10 @@ const useMovies = () => {
   };
 
   return {
-    getMovies,
+    searchMovie,
     loading,
     error,
   };
 };
 
-export default useMovies;
+export default useSearchMovie;

@@ -1,11 +1,11 @@
 import { create } from "zustand";
 export interface Movies {
   page: number;
-  results: MovieResult[];
+  results: ResultMovie[];
   total_pages: number;
   total_results: number;
 }
-export interface MovieResult {
+export interface ResultMovie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -21,14 +21,18 @@ export interface MovieResult {
   vote_average: number;
   vote_count: number;
 }
-
 interface MoviesState {
-  movies: Movies[];
+  movies: Movies;
 }
 interface MoviesActions {
-  setMovies: (movies: Movies[]) => void;
+  setMovies: (movies: Movies) => void;
 }
 export const useMoviesStore = create<MoviesState & MoviesActions>()((set) => ({
-  movies: [],
-  setMovies: (result: Movies[]) => set({ movies: [...result] }),
+  movies: {
+    page: 0,
+    results: [],
+    total_pages: 0,
+    total_results: 0,
+  },
+  setMovies: (result: Movies) => set({ movies: { ...result } }),
 }));
