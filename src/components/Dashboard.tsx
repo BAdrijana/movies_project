@@ -6,17 +6,22 @@ import useMovies from "../hooks/useMovies";
 import { useMoviesStore } from "../store/moviesStore";
 import useGenres from "../hooks/useGenres";
 import { useGenresStore } from "../store/genresStore";
+import Pagination from "./Pagination";
+import { useGenreActiveStore } from "../store/genreActiveStore";
 const Dashboard = () => {
+  const [page, setPage] = useState(1);
+
   const { getMovies } = useMovies();
   const { getGenres } = useGenres();
 
   const movies = useMoviesStore((state) => state.movies);
   const genre = useGenresStore((state) => state.genre);
+  const genreActive = useGenreActiveStore((state) => state.genreActive);
+
   useEffect(() => {
-    getMovies();
+    getMovies(page, genreActive);
     getGenres();
   }, []);
-
   return (
     <div className="main_container">
       <div className="sidebar_container">
@@ -31,6 +36,13 @@ const Dashboard = () => {
           {movies?.results.map((results) => (
             <MovieCard movie={results} />
           ))}
+        </div>
+        <div className="movies_container">
+          <Pagination
+            totalItems={movies?.total_pages}
+            page={page}
+            setPage={setPage}
+          />
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { MovieCardProps } from "../types";
 import MovieModal from "./MovieModal";
 import useMovieInfo from "../hooks/useMovieInfo";
 import { useModalStore } from "../store/modalStore";
+import { useGenresStore } from "../store/genresStore";
 
 export interface MovieInfo {
   adult: boolean;
@@ -65,8 +66,10 @@ export interface SpokenLanguage {
 }
 const MovieCard = ({ movie }: MovieCardProps) => {
   const { getMovieInfo, loading } = useMovieInfo();
+  const genre = useGenresStore((state) => state.genre);
 
   const [movieData, setMovieData] = useState<MovieInfo>();
+  const [movieGenres, setMovieGenres] = useState<Genre[]>();
 
   const getMovie = () => {
     getMovieInfo(movie.id, setMovieData);
@@ -79,8 +82,15 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   useEffect(() => {
     setMovieData(undefined);
   }, []);
+  useEffect(() => {
+    const movie_genre_card = genre.filter((item) =>
+      movie.genre_ids.includes(item.id)
+    );
+    setMovieGenres(movie_genre_card);
+  }, [movie, genre]);
   return (
     <div
+      key={movie.id}
       className="card_container center_item"
       onClick={() => {
         getMovie();
@@ -97,12 +107,25 @@ const MovieCard = ({ movie }: MovieCardProps) => {
         </div>
 
         <div className="movie_info_card_container">
-          <div className="movie_title_card">{movie.title}</div>
-          <div className="movie_genre_card">Genre</div>
-          <div className="movie_aditonal_info_card">
+          <div className="movie_title_card">
+            <span className="info-card-title">Title: </span>
+            {movie.title}
+          </div>
+
+          <div className="movie_genre_card">
+            <span className="info-card-title">Genre: </span>
+            {movieGenres?.map((item, i) => {
+              return (
+                <span key={item.id} className="movie_genre_item">
+                  {item.name}
+                </span>
+              );
+            })}
+          </div>
+          {/* <div className="movie_aditonal_info_card">
             <div className="movie_ratings_card">{movie.popularity}</div>
             <div className="movie_runtime_card">Runtime</div>
-          </div>
+          </div> */}
         </div>
       </div>
 

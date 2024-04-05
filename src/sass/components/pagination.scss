@@ -1,0 +1,55 @@
+.pagination{
+    width: 100%;
+    .pagination_items{
+        flex-direction: row;
+
+    }
+}
+.page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    li{
+        list-style: none;
+    }
+  }
+  .btn-page {
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .btn-nav {
+    padding: 8px;
+    margin: 1.8rem;
+  }
+  
+  .btn-nav {
+    width: 42px;
+    height: 42px;
+    border: 1.5px solid rgb(42, 62, 109);
+    color: rgb(42, 62, 109);
+  }
+  .btn-nav,
+    .btn-page {
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    }
+  .btn-nav:hover,
+  .btn-page:hover {
+    background-color: rgb(42, 62, 109);
+    color: #fff;
+  }
+  
+  .btn-page {
+    border: none;
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+  }
+  
+  .btn-selected {
+    background-color: rgb(42, 62, 109);
+    color: #fff;
+  }  

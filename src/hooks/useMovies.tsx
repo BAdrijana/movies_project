@@ -31,9 +31,11 @@ const useMovies = () => {
   const [error, setError] = useState(null);
   const { setMovies } = useMoviesStore((state) => state);
 
-  const getMovies = async () => {
+  const getMovies = async (page: number, genre: number) => {
     setLoading(true);
     setError(null);
+    let with_genres: string = "";
+    if (genre) with_genres = `&with_genres=${genre}`;
 
     try {
       const options = {
@@ -45,7 +47,7 @@ const useMovies = () => {
       };
 
       const response = await fetch(
-        `${baseURL}discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`,
+        `${baseURL}discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc${with_genres}`,
         options
       );
       const data = await response.json();

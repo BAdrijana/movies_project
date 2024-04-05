@@ -4,14 +4,22 @@
     border-radius: 1rem;
     padding: 1rem;
     margin: 1rem 0;
+    width: 23%;
     .card{
         padding: 0.5rem;
+        margin: 1rem;
         flex-direction: column;
         cursor: pointer;
         .movie_aditonal_info_card{
             display: flex;
             justify-content: space-between;
-
         }
     }
+    .movie_info_card_container{
+        font-size: 1.2rem;
+        .info-card-title{
+            font-weight: 600;
+        }
+    }
+    .movie_genre_item:not(:last-child)::after { content: ', ' }
 }
