@@ -25,6 +25,7 @@ export interface Genres {
 const Sidebar = (genre: Genres) => {
   const { getGenresMovieList } = useGenresMovieList();
   const setGenreActive = useGenreActiveStore((state) => state.setGenreActive);
+  const genreActive = useGenreActiveStore((state) => state.genreActive);
 
   return (
     <div className="aside">
@@ -32,7 +33,11 @@ const Sidebar = (genre: Genres) => {
         return (
           <div
             key={item.id}
-            className="genre_links"
+            className={
+              genreActive == item.id
+                ? "active_genre genre_links"
+                : "genre_links"
+            }
             onClick={() => {
               getGenresMovieList(item.id);
               setGenreActive(item.id);
